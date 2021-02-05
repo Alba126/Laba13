@@ -21,6 +21,8 @@ from dataclasses import dataclass, field
 import sys
 from typing import List
 import xml.etree.ElementTree as ET
+import json
+
 
 
 @dataclass(frozen=True)
@@ -81,12 +83,12 @@ class Staff:
 
         parts = command.split(' ', maxsplit=2)
 
-        sel = int(parts[1])
+        period = str(parts[1])
 
         count = 0
 
         for market in self.markets:
-            if markets.get('shop') == sel:
+            if markets.get('shop') ==  period:
                 count += 1
                 print('Магазин:', market.shop)
                 print('Продукт:', market.product)
@@ -116,7 +118,7 @@ class Staff:
                     if shop is not None and product is not None \
                             and price is not None:
                         self.markets.append(
-                            market(
+                            markets(
                                 shop=shop,
                                 product=product,
                                 price=price
